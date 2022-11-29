@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import React from 'react'
-//import {AiOutlineShopping} from 'react-icons/ai'
+import {AiOutlineShopping} from 'react-icons/ai'
 
 const Navbar = () => {
   return (
@@ -10,7 +10,7 @@ const Navbar = () => {
       </p>
 
       <button type="button" className="cart-icon" onClick={() => setShowCart(true)}>
-        {/*<AiOutlineShopping />*/}
+        <AiOutlineShopping />
         <span className="cart-item-qty">1</span>
       </button>
 

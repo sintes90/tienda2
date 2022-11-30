@@ -107,8 +107,8 @@ export const getStaticProps = async () => {
         name: 'product1',
         price: 100,
         image: 'https://upload.wikimedia.org/wikipedia/commons/3/3c/IMG_logo_%282017%29.svg',
-        details: 'Great lokking and sounding product'
-      }
+        details: 'Great lokking and sounding product',
+      },
     }
   }
 

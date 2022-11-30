@@ -4,7 +4,7 @@ import {useRouter} from 'next/router';
 import { AiFillStar, AiOutlineMinus, AiOutlinePlus, AiOutlineStar } from 'react-icons/ai';
 import { useStateContext } from '../../context/StateContext';
 
-// const [index, setIndex] = useState(0);
+
 
 const ProductDetails = ({ product }) => {
   const router = useRouter();
@@ -12,8 +12,9 @@ const ProductDetails = ({ product }) => {
     return <div>Loading...</div>
   }
 
-  const { name, price, details, image,} = product;
-  const {decQty, incQty, qty} = useStateContext();
+  const { name, price, details, image} = product;
+  //const [index, setIndex] = useState(0);
+  const {decQty, incQty, qty, onAdd} = useStateContext();
 
 
   return (
@@ -60,12 +61,12 @@ const ProductDetails = ({ product }) => {
             <h3>Quantity:</h3>
             <p className="quantity-desc">
               <span className="minus" onClick={decQty}><AiOutlineMinus/></span>
-              <span className="num" onClick="">{qty}</span>
+              <span className="num">{qty}</span>
               <span className="plus" onClick={incQty}><AiOutlinePlus/></span>
             </p>
           </div>
           <div className="buttons">
-            <button type="button" className="add-to-cart" onClick="">Add to Cart</button>
+            <button type="button" className="add-to-cart" onClick={() => onAdd(product, qty)}>Add to Cart</button>
             <button type="button" className="buy-now" onClick="">Buy Now</button>
           </div>
         </div>

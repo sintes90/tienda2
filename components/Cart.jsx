@@ -11,22 +11,22 @@ const Cart = () => {
   const cartRef = useRef();
   const { totalPrice, totalQuantities, cartItems, setShowCart, toggleCartItemQuantity, onRemove } = useStateContext();
 
- 
+
   const handleCheckout = async () => {
-    const result= "hola";
-  //console.log('handleCheckout');
-  
+    //const result= "hola";
+    //console.log('handleCheckout');
+
     const stripe = await getStripe();
-   // console.log('handleCheckout2');
-   const response = await fetch('http://localhost:3000/api/stripe', {
+    // console.log('handleCheckout2');
+    const response = await fetch('http://localhost:3000/api/stripe', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify( cartItems ),
+      body: JSON.stringify(cartItems),
     });
     //console.log( result ) ;
-   
+
 
     const data = await response.json();
     //console.log(data);
@@ -48,10 +48,10 @@ const Cart = () => {
         <button
           type="button"
           className="cart-heading"
-          onclick={() => setShowCart(false)}>
-            <AiOutlineLeft />
-            <span className="heading">Your Cart</span>
-            <span className="cart-num-items">({totalQuantities} items)</span>
+          onClick={() => setShowCart(false)}>
+          <AiOutlineLeft />
+          <span className="heading">Your Cart</span>
+          <span className="cart-num-items">({totalQuantities} items)</span>
         </button>
 
         {cartItems.length < 1 && (
@@ -83,8 +83,8 @@ const Cart = () => {
                   <div>
                     <p className="quantity-desc">
                       <span className="minus" onClick={() => toggleCartItemQuantity(item.id, 'dec')}><AiOutlineMinus /></span>
-                      <span className="num" onclick="">{item.quantity}</span>
-                      <span className="plus"onClick={() => toggleCartItemQuantity(item.id, 'inc')}><AiOutlinePlus /></span>
+                      <span className="num" /*onClick=""*/>{item.quantity}</span>
+                      <span className="plus" onClick={() => toggleCartItemQuantity(item.id, 'inc')}><AiOutlinePlus /></span>
                     </p>
                   </div>
                   <button
@@ -99,14 +99,14 @@ const Cart = () => {
             </div>
           ))}
         </div>
-        { cartItems.length >= 1 && (
+        {cartItems.length >= 1 && (
           <div className="cart-bottom">
             <div className="total">
               <h3>Subtotal:</h3>
               <h3>${totalPrice}</h3>
             </div>
             <div className="btn-container">
-              <button type="button" className="btn" onClick= {handleCheckout}>
+              <button type="button" className="btn" onClick={handleCheckout}>
                 Pay with Stripe
               </button>
             </div>

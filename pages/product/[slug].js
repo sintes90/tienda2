@@ -1,9 +1,9 @@
 import React from 'react'
-//import { Product } from '../../components';
-import {useRouter} from 'next/router';
 import { AiFillStar, AiOutlineMinus, AiOutlinePlus, AiOutlineStar } from 'react-icons/ai';
-import { useStateContext } from '../../context/StateContext';
+//import { Product } from '../../components';
 
+import { useStateContext } from '../../context/StateContext';
+import { useRouter } from 'next/router';
 
 
 const ProductDetails = ({ product }) => {
@@ -67,7 +67,7 @@ const ProductDetails = ({ product }) => {
           </div>
           <div className="buttons">
             <button type="button" className="add-to-cart" onClick={() => onAdd(product, qty)}>Add to Cart</button>
-            <button type="button" className="buy-now" onClick="">Buy Now</button>
+            <button type="button" className="buy-now" /*onClick=""*/>Buy Now</button>
           </div>
         </div>
       </div>

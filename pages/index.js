@@ -12,7 +12,8 @@ const Home = ({products}) => {
 
     <div className="products-container">
       {/*['product1', 'product2'].map((product) => product)*/}
-      {products?.map((product) => <Product key={product.id} product={product} />)}
+      {/* products?.map //estaba asi */}
+      {products.map((product) => <Product key={product.id} product={product} />)}
     </div>
     <FooterBanner/>
   </>

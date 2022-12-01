@@ -1,21 +1,11 @@
-import Stripe from 'stripe';
-
-const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
+const stripe = require('stripe')(process.env.NEXT_PUBLIC_STRIPE_SECRET_KEY);
 
 export default async function handler(req, res) {
   if (req.method === 'POST') {
-    try {
-        const params = {
-            
-        }
-      // Create Checkout Sessions from body params.
-      const session = await stripe.checkout.sessions.create();  
-      res.redirect(303, session.url);
-    } catch (err) {
-      res.status(err.statusCode || 500).json(err.message);
-    }
-  } else {
-    res.setHeader('Allow', 'POST');
-    res.status(405).end('Method Not Allowed');
+    res.body = req.body;
   }
+  console.log(req.body)
+  //console.log(res.body);
+  res.status(200).json({ name: 'carrito recibido' });
+
 }

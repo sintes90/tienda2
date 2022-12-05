@@ -6,7 +6,10 @@ import { useStateContext } from '../../context/StateContext';
 import { useRouter } from 'next/router';
 
 
+
 const ProductDetails = ({ product }) => {
+  const {decQty, incQty, qty, onAdd} = useStateContext();
+  
   const router = useRouter();
   if (router.isFallback) {
     return <div>Loading...</div>
@@ -14,10 +17,12 @@ const ProductDetails = ({ product }) => {
 
   const { name, price, details, image} = product;
   //const [index, setIndex] = useState(0);
-  const {decQty, incQty, qty, onAdd} = useStateContext();
+
+ 
 
 
   return (
+ 
     <div>
       <div className="product-detail-container">
         <div>

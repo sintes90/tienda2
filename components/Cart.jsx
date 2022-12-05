@@ -16,7 +16,7 @@ const Cart = () => {
     //const result= "hola";
     //console.log('handleCheckout');
 
-    const stripe = await getStripe();
+    //const stripe = await getStripe();
     // console.log('handleCheckout2');
     const response = await fetch('http://localhost:3000/api/stripe', {
       method: 'POST',
@@ -31,15 +31,7 @@ const Cart = () => {
     const data = await response.json();
     //console.log(data);
 
-
-
-
-
-    if (response.statusCodes === 500) return;
-
-    toast.loading('Redirecting to checkout...');
-
-    stripe.redirectToCheckout({ sessionId: data.id });
+    
   }
 
   return (

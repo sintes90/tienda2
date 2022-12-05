@@ -16,7 +16,7 @@ const Cart = () => {
     //const result= "hola";
     //console.log('handleCheckout');
 
-    //const stripe = await getStripe();
+   
     // console.log('handleCheckout2');
     const response = await fetch('http://localhost:3000/api/stripe', {
       method: 'POST',
@@ -27,11 +27,11 @@ const Cart = () => {
     });
     //console.log( result ) ;
 
-
     const data = await response.json();
     //console.log(data);
-
     
+
+
   }
 
   return (

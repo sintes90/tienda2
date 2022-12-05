@@ -8,8 +8,8 @@ import { useRouter } from 'next/router';
 
 
 const ProductDetails = ({ product }) => {
+
   const {decQty, incQty, qty, onAdd} = useStateContext();
-  
   const router = useRouter();
   if (router.isFallback) {
     return <div>Loading...</div>
@@ -18,7 +18,6 @@ const ProductDetails = ({ product }) => {
   const { name, price, details, image} = product;
   //const [index, setIndex] = useState(0);
 
- 
 
 
   return (
@@ -109,7 +108,7 @@ export const getStaticProps = async () => {
     props: {
       product: {
         id: 1,
-        name: 'product1',
+        name: 'Product1',
         price: 100,
         image: 'https://upload.wikimedia.org/wikipedia/commons/3/3c/IMG_logo_%282017%29.svg',
         details: 'Great lokking and sounding product',

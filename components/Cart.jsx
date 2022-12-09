@@ -7,31 +7,53 @@ import toast from 'react-hot-toast';
 import { useStateContext } from '../context/StateContext';
 import getStripe from '../lib/getStripe';
 
+
+import { loadStripe } from "@stripe/stripe-js";
+import { Elements } from "@stripe/react-stripe-js";
+import {CheckoutForm} from "../components/CheckoutForm";
+// Make sure to call loadStripe outside of a component’s render to avoid
+// recreating the Stripe object on every render.
+// This is your test publishable API key.
+const stripePromise = loadStripe('pk_test_51M9pCXCSjOrViVMJvb4FuSl2A4DldZqwyHj3PS9trxPooTHgzg2GgkEftV9xFigFxWZSdP7uThOzT6KapHGUsxNy00TPsU2oyk');
+
+
+
 const Cart = () => {
+  
+  
   const cartRef = useRef();
   const { totalPrice, totalQuantities, cartItems, setShowCart, toggleCartItemQuantity, onRemove } = useStateContext();
-
+  const [clientSecret, setClientSecret] = React.useState("");
 
   const handleCheckout = async () => {
-    //const result= "hola";
-    //console.log('handleCheckout');
 
-   
-    // console.log('handleCheckout2');
-    const response = await fetch('http://localhost:3000/api/stripe', {
+    const response = await fetch('/api/stripe', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(cartItems),
     });
-    //console.log( result ) ;
-
     const data = await response.json();
-    //console.log(data);
+    setClientSecret(data.clientSecret);
     
-
-
+    const appearance = {
+      theme: 'stripe',
+    };
+    const options = {
+      clientSecret,
+      appearance,
+    };
+    
+    return (
+      <div className="App">
+        {clientSecret && (
+          <Elements options={options} stripe={stripePromise}>
+            <CheckoutForm />
+          </Elements>
+        )}
+      </div>
+    );
   }
 
   return (
@@ -99,7 +121,7 @@ const Cart = () => {
             </div>
             <div className="btn-container">
               <button type="button" className="btn" onClick={handleCheckout}>
-                Pay with Stripe
+                Pay with Stripe 
               </button>
             </div>
           </div>

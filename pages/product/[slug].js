@@ -6,7 +6,6 @@ import { useStateContext } from '../../context/StateContext';
 import { useRouter } from 'next/router';
 
 
-
 const ProductDetails = ({ product }) => {
 
   const {decQty, incQty, qty, onAdd} = useStateContext();

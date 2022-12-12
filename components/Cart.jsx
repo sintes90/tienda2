@@ -9,7 +9,7 @@ import getStripe from '../lib/getStripe';
 
 
 import { loadStripe } from "@stripe/stripe-js";
-import { Elements } from "@stripe/react-stripe-js";
+import { Elements } from "@stripe/stripe-js";
 import {CheckoutForm} from "../components/CheckoutForm";
 // Make sure to call loadStripe outside of a component’s render to avoid
 // recreating the Stripe object on every render.
@@ -17,9 +17,7 @@ import {CheckoutForm} from "../components/CheckoutForm";
 const stripePromise = loadStripe('pk_test_51M9pCXCSjOrViVMJvb4FuSl2A4DldZqwyHj3PS9trxPooTHgzg2GgkEftV9xFigFxWZSdP7uThOzT6KapHGUsxNy00TPsU2oyk');
 
 
-
 const Cart = () => {
-  
   
   const cartRef = useRef();
   const { totalPrice, totalQuantities, cartItems, setShowCart, toggleCartItemQuantity, onRemove } = useStateContext();
@@ -27,7 +25,7 @@ const Cart = () => {
 
   const handleCheckout = async () => {
 
-    const response = await fetch('/api/stripe', {
+    const response = await fetch('/api/create-payment-intent', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -35,7 +33,7 @@ const Cart = () => {
       body: JSON.stringify(cartItems),
     });
     const data = await response.json();
-    setClientSecret(data.clientSecret);
+    //etClientSecret(data.clientSecret);
     
     const appearance = {
       theme: 'stripe',
@@ -46,13 +44,15 @@ const Cart = () => {
     };
     
     return (
-      <div className="App">
-        {clientSecret && (
-          <Elements options={options} stripe={stripePromise}>
-            <CheckoutForm />
-          </Elements>
-        )}
-      </div>
+      <>
+        <div className="Cart">
+          {clientSecret && (
+            <Elements options={options} stripe={stripePromise}>
+              <CheckoutForm />
+            </Elements>
+          )}
+        </div>
+      </>
     );
   }
 
@@ -120,7 +120,7 @@ const Cart = () => {
               <h3>${totalPrice}</h3>
             </div>
             <div className="btn-container">
-              <button type="button" className="btn" onClick={handleCheckout}>
+              <button onClick={handleCheckout} type="button" className="btn" >
                 Pay with Stripe 
               </button>
             </div>

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Toaster } from 'react-hot-toast';
 
-import { Layout, StripeForm } from '../components'
+import { Layout } from '../components'
 import '../styles/globals.css'
 import { StateContext } from '../context/StateContext';
 

@@ -51,7 +51,7 @@ export default async function handler(req, res) {
   }*/
 
   const { items } = req.body;
-  console.log(items);
+  //console.log(items);
   // Create a PaymentIntent with the order amount and currency
   const paymentIntent = await stripe.paymentIntents.create({
     amount: calculateOrderAmount(items),

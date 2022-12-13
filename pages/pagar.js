@@ -3,7 +3,7 @@ import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
 
 import CheckoutForm from "../components/CheckoutForm";
-import { CardNumberElement, CardExpiryElement, CardCvcElement, useElements, useStripe } from '@stripe/react-stripe-js';
+
 // Make sure to call loadStripe outside of a component’s render to avoid
 // recreating the Stripe object on every render.
 // This is your test publishable API key.
@@ -32,7 +32,7 @@ export default function App() {
   };
 
   return (
-    <div>
+    <div className="App">
       {clientSecret && (
         <Elements options={options} stripe={stripePromise}>
           <CheckoutForm />

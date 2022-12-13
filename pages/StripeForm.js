@@ -20,32 +20,32 @@ const price = 50;
 
 const StripeForm = () => {
   //console.log("hola");
-   //const stripe = useStripe();
-   //const elements = useElements();
+   const stripe = useStripe();
+   const elements = useElements();
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const handleSubmit = async () => {
+   
     console.log("hola2");
 
     //try {
 
-      // if (!stripe || !elements){
-      //   throw new Error('Stripe not detected. Please try again later.')
-      // }
-      // const cardElement = elements.getElement(CardNumberElement);
+      if (!stripe || !elements){
+        throw new Error('Stripe not detected. Please try again later.')
+      }
+      const cardElement = elements.getElement(CardNumberElement);
 
-      // if (!cardElement){
-      //   throw new Error('Card element not found')
-      // }
+      if (!cardElement){
+        throw new Error('Card element not found')
+      }
 
-      // const { paymentMethod, error } = await stripe.createPaymentMethod({
-      //   type: 'card',
-      //   card: cardElement,
-      // });
+      const { paymentMethod, error } = await stripe.createPaymentMethod({
+        type: 'card',
+        card: cardElement,
+      });
 
-      // if (error){
-      //   throw new Error(error.message ?? 'Error')
-      // }
+      if (error){
+        throw new Error(error.message ?? 'Error')
+      }
       
       const params = {
         id: 1,
@@ -53,7 +53,7 @@ const StripeForm = () => {
         amount: units * price,
         price: 50,
       }
-      console.log(params);
+      //console.log(params);
 
       const response = await fetch("/api/create-payment-intent", {
         method: 'POST',
@@ -85,6 +85,7 @@ const StripeForm = () => {
   return (
     <>
       <Elements stripe={stripePromise}>
+        <StripeForm />
         <div >
           <div>
             <div >Card details</div>

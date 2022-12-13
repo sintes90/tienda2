@@ -45,7 +45,7 @@ const Cart = () => {
     
     return (
       <>
-        <div className="Cart">
+        <div>
           {clientSecret && (
             <Elements options={options} stripe={stripePromise}>
               <CheckoutForm />

@@ -13,17 +13,32 @@ import { useEffect } from 'react';
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/stripe-js";
 import { CheckoutForm } from "../components/CheckoutForm";
-import StripeApp, { pagar } from '../pages/pagar';
+import PayComponent from "../components/PayComponent";
+
+
 // Make sure to call loadStripe outside of a component’s render to avoid
 // recreating the Stripe object on every render.
 // This is your test publishable API key.
 const stripePromise = loadStripe('pk_test_51M9pCXCSjOrViVMJvb4FuSl2A4DldZqwyHj3PS9trxPooTHgzg2GgkEftV9xFigFxWZSdP7uThOzT6KapHGUsxNy00TPsU2oyk');
 
-const Cart = () => {
+
+const ShowPayStripe = () => {
+  console.log("ShowPayStripe")
+  return (
+    <div>
+      <PayComponent />
+    </div>
+  )
   
+
+}
+
+const Cart = () => {
+
+
   const cartRef = useRef();
   const { totalPrice, totalQuantities, cartItems, setShowCart, toggleCartItemQuantity, onRemove } = useStateContext();
-   
+
   //const handleCheckout = async () => {
 
   //   const response = await fetch('/api/create-payment-intent', {
@@ -72,7 +87,7 @@ const Cart = () => {
   //     },
   //     body: JSON.stringify(cartItems),
   //   })
-      
+
   //   console.log(response);
   //   console.log(clientSecret);
 
@@ -170,7 +185,8 @@ const Cart = () => {
               <h3>${totalPrice}</h3>
             </div>
             <div className="btn-container">
-              <button onClick={StripeApp} type="button" className="btn" >
+              <button onClick={ShowPayStripe} type="button" className="btn" >
+                {/* <PayComponent /> */}
                 Pay with Stripe
               </button>
             </div>

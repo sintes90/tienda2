@@ -57,10 +57,10 @@ export default function CheckoutForm() {
     const response = await stripe.confirmPayment({
       elements,
       confirmParams: {
-       },
+      },
       redirect: 'if_required'
-     });
-     
+    });
+
     if (response.error) {
       setMessage(response.error.message);
     } else {

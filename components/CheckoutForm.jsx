@@ -6,6 +6,7 @@ import {
 } from "@stripe/react-stripe-js";
 
 export default function CheckoutForm() {
+
   const stripe = useStripe();
   const elements = useElements();
 
@@ -85,7 +86,7 @@ export default function CheckoutForm() {
   };
 
   const paymentElementOptions = {
-    layout: "tabs",
+    layout: "accordion",
   };
 
   return (

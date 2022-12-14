@@ -9,7 +9,7 @@ import CheckoutForm from "../components/CheckoutForm";
 // This is your test publishable API key.
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY);
 
-export default function App() {
+export default function StripeApp() {
   const [clientSecret, setClientSecret] = React.useState("");
 
   const params = {
@@ -31,7 +31,7 @@ export default function App() {
   }, []);
 
   const appearance = {
-    theme: 'stripe',
+    theme: 'flat',
   };
   const options = {
     clientSecret,
@@ -39,7 +39,7 @@ export default function App() {
   };
 
   return (
-    <div className="App">
+    <div className="StripeApp">
       {clientSecret && (
         <Elements options={options} stripe={stripePromise}>
           <CheckoutForm />

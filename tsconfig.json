@@ -23,7 +23,7 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx"
-, "pages/StripeForm.jsx"  ],
+, "pages/StripeForm.jsx", "pages/StripeForm.js"  ],
   "exclude": [
     "node_modules"
   ]

@@ -16,29 +16,27 @@ const units = 2;
 const price = 50;
 
 const StripeForm = () => {
-
-
-
+  const [clientSecret, setClientSecret] = React.useState("");
   const handleSubmit = async () => {
-
     console.log("hola2");
-     const stripe = useStripe();
-     const elements = useElements();
+
+    //const stripe = useStripe();
+    // const elements = useElements();
     // try {
 
     //   if (!stripe || !elements) {
     //     throw new Error('Stripe not detected. Please try again later.')
     //   }
-       const cardElement = elements.getElement(CardNumberElement);
+    //const cardElement = elements.getElement(CardNumberElement);
 
     //   if (!cardElement) {
     //     throw new Error('Card element not found')
     //   }
 
-    const { paymentMethod, error } = await stripe.createPaymentMethod({
-      type: 'card',
-      card: cardElement,
-    });
+    // const { paymentMethod, error } = await stripe.createPaymentMethod({
+    //   type: 'card',
+    //   card: cardElement,
+    // });
 
     // if (error) {
     //   throw new Error(error.message ?? 'Error')
@@ -78,11 +76,16 @@ const StripeForm = () => {
 
   }
 
-
   return (
-    <Elements stripe={stripePromise}>
-      {/* <CheckoutForm/> */}
-     
+    <>
+    <div className="App">
+      {clientSecret && (
+        <Elements options={options} stripe={stripePromise}>
+          <CheckoutForm />
+        </Elements>
+      )}
+    </div>
+      <Elements stripe={stripePromise}>
         <div >
           <div>
             <div >Card details</div>
@@ -104,8 +107,8 @@ const StripeForm = () => {
           </div>
         </div>
         {<button onClick={handleSubmit} >{units} pay {(price * units).toFixed(2)}</button>}
-    
-    </Elements>
+      </Elements>
+    </>
   )
 }
 

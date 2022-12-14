@@ -13,18 +13,17 @@ import { useEffect } from 'react';
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/stripe-js";
 import { CheckoutForm } from "../components/CheckoutForm";
-
+import StripeApp, { pagar } from '../pages/pagar';
 // Make sure to call loadStripe outside of a component’s render to avoid
 // recreating the Stripe object on every render.
 // This is your test publishable API key.
 const stripePromise = loadStripe('pk_test_51M9pCXCSjOrViVMJvb4FuSl2A4DldZqwyHj3PS9trxPooTHgzg2GgkEftV9xFigFxWZSdP7uThOzT6KapHGUsxNy00TPsU2oyk');
 
-
 const Cart = () => {
-  const [clientSecret, setClientSecret] = React.useState("");
+  
   const cartRef = useRef();
   const { totalPrice, totalQuantities, cartItems, setShowCart, toggleCartItemQuantity, onRemove } = useStateContext();
-
+   
   //const handleCheckout = async () => {
 
   //   const response = await fetch('/api/create-payment-intent', {
@@ -58,55 +57,54 @@ const Cart = () => {
   //   );
   // }
 
-  const handleSubmit = async() => {
-    const params = {
-      id: 1,
-      units: 2,
-      //amount: units * price,
-      price: 50,
-    }
+  // const handleSubmit = async() => {
+  //   const params = {
+  //     id: 1,
+  //     units: 2,
+  //     //amount: units * price,
+  //     price: 50,
+  //   }
 
-    const response =  fetch("/api/create-payment-intent", {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(cartItems),
-    })
+  //   const response =  fetch("/api/create-payment-intent", {
+  //     method: 'POST',
+  //     headers: {
+  //       'Content-Type': 'application/json',
+  //     },
+  //     body: JSON.stringify(cartItems),
+  //   })
       
+  //   console.log(response);
+  //   console.log(clientSecret);
 
-    console.log(response);
-    console.log(clientSecret);
+  //   // React.useEffect(() => {
+  //   //   // Create PaymentIntent as soon as the page loads
+  //   //   fetch("/api/create-payment-intent", {
+  //   //     method: "POST",
+  //   //     headers: { "Content-Type": "application/json" },
+  //   //     body: JSON.stringify(params),
+  //   //   })
+  //   //     .then((res) => res.json())
+  //   //     .then((data) => setClientSecret(data.clientSecret));
+  //   // }, []);
 
-    // React.useEffect(() => {
-    //   // Create PaymentIntent as soon as the page loads
-    //   fetch("/api/create-payment-intent", {
-    //     method: "POST",
-    //     headers: { "Content-Type": "application/json" },
-    //     body: JSON.stringify(params),
-    //   })
-    //     .then((res) => res.json())
-    //     .then((data) => setClientSecret(data.clientSecret));
-    // }, []);
+  //   // console.log(clientSecret);
 
-    //console.log(clientSecret);
+  //   // const appearance = {
+  //   //   theme: 'stripe',
+  //   // };
+  //   // const options = {
+  //   //   clientSecret,
+  //   //   appearance,
+  //   // };
 
-    const appearance = {
-      theme: 'stripe',
-    };
-    const options = {
-      clientSecret,
-      appearance,
-    };
-
-    return (
-      <form>
-        <div>
-          <p>Payment</p>
-        </div>
-      </form>
-    );
-  }
+  //   return (
+  //     <form>
+  //       <div>
+  //         <p>Payment</p>
+  //       </div>
+  //     </form>
+  //   );
+  // }
 
   return (
     <div className="cart-wrapper" ref={cartRef}>
@@ -172,7 +170,7 @@ const Cart = () => {
               <h3>${totalPrice}</h3>
             </div>
             <div className="btn-container">
-              <button onClick={handleSubmit} type="button" className="btn" >
+              <button onClick={StripeApp} type="button" className="btn" >
                 Pay with Stripe
               </button>
             </div>

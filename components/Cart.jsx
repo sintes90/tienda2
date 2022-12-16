@@ -11,9 +11,8 @@ import { useState } from 'react';
 import { useEffect } from 'react';
 
 import { loadStripe } from "@stripe/stripe-js";
-import { Elements } from "@stripe/stripe-js";
-import { CheckoutForm } from "../components/CheckoutForm";
 import PayComponent from "../components/PayComponent";
+import { Elements } from '@stripe/react-stripe-js';
 
 
 // Make sure to call loadStripe outside of a component’s render to avoid
@@ -22,23 +21,11 @@ import PayComponent from "../components/PayComponent";
 const stripePromise = loadStripe('pk_test_51M9pCXCSjOrViVMJvb4FuSl2A4DldZqwyHj3PS9trxPooTHgzg2GgkEftV9xFigFxWZSdP7uThOzT6KapHGUsxNy00TPsU2oyk');
 
 
-const ShowPayStripe = () => {
-  console.log("ShowPayStripe")
-  return (
-    <div>
-      <PayComponent />
-    </div>
-  )
-  
-
-}
 
 const Cart = () => {
 
-
   const cartRef = useRef();
   const { totalPrice, totalQuantities, cartItems, setShowCart, toggleCartItemQuantity, onRemove } = useStateContext();
-
   //const handleCheckout = async () => {
 
   //   const response = await fetch('/api/create-payment-intent', {
@@ -121,6 +108,15 @@ const Cart = () => {
   //   );
   // }
 
+  // function ShowPayStripe() {
+  //   console.log("ShowPayStripe")
+  //   return (
+  //       <div>
+  //         <PayComponent />
+  //       </div>
+  //   )
+  // }
+
   return (
     <div className="cart-wrapper" ref={cartRef}>
       <div className="cart-container">
@@ -185,10 +181,12 @@ const Cart = () => {
               <h3>${totalPrice}</h3>
             </div>
             <div className="btn-container">
-              <button onClick={ShowPayStripe} type="button" className="btn" >
-                {/* <PayComponent /> */}
+              {/* <button type="button" className="btn" >
                 Pay with Stripe
-              </button>
+              </button> */}
+              <div className="App">
+                  <PayComponent items= {cartItems}/>
+              </div>
             </div>
           </div>
         )}

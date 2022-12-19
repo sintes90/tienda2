@@ -1,7 +1,21 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 
+
 const HeroBanner = () => {
+  
+  const [imgHerobanner, setImgHerobanner] = useState();
+  
+  //petition to get the image from the database and set it to the state.
+  useEffect(() => {
+      fetch('http://localhost/products/4')
+      .then(res => res.json())
+      .then(data => {
+        setImgHerobanner(data);
+      })
+      .catch(err => console.log(err));
+  }, []);
+
 
   return (
     <div className="hero-banner-container">
@@ -9,7 +23,7 @@ const HeroBanner = () => {
         <p className="beats-solo">SMALL TEXT</p>
         <h3>MID TEXT</h3>
         <h1>LARGE TEXT</h1>
-        <img src="https://www.marsgaming.eu/uploads/_thumnails/mh4v2_960x960.png" alt="headphones" className="hero-banner-image"/>
+        <img src={imgHerobanner?.herobanner} alt="headphones" className="hero-banner-image"/>
       
         <div>
           <Link href={"/product/ID"}>

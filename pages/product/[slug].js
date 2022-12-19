@@ -111,7 +111,6 @@ const ProductDetails = ({ product }) => {
 }
 
 
-
 export const getStaticPaths = async () => {
   return {
     paths: [],
@@ -120,6 +119,7 @@ export const getStaticPaths = async () => {
 }
 
 export const getStaticProps = async () => {
+
   return {
     props: {
       product: {

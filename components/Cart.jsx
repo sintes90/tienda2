@@ -7,13 +7,9 @@ import toast from 'react-hot-toast';
 
 import { useStateContext } from '../context/StateContext';
 import getStripe from '../lib/getStripe';
-import { useState } from 'react';
-import { useEffect } from 'react';
 
 import { loadStripe } from "@stripe/stripe-js";
 import PayComponent from "../components/PayComponent";
-import { Elements } from '@stripe/react-stripe-js';
-
 
 // Make sure to call loadStripe outside of a component’s render to avoid
 // recreating the Stripe object on every render.
@@ -108,14 +104,7 @@ const Cart = () => {
   //   );
   // }
 
-  // function ShowPayStripe() {
-  //   console.log("ShowPayStripe")
-  //   return (
-  //       <div>
-  //         <PayComponent />
-  //       </div>
-  //   )
-  // }
+  console.log(cartRef);
 
   return (
     <div className="cart-wrapper" ref={cartRef}>
@@ -132,7 +121,7 @@ const Cart = () => {
         {cartItems.length < 1 && (
           <div className="empty-cart">
             <AiOutlineShopping size={150} />
-            <h3>Your cart is empty</h3>
+            <h3>Your shopping bag is empty</h3>
             <Link href="/">
               <button
                 type="button"
@@ -174,6 +163,7 @@ const Cart = () => {
             </div>
           ))}
         </div>
+        
         {cartItems.length >= 1 && (
           <div className="cart-bottom">
             <div className="total">
@@ -184,8 +174,10 @@ const Cart = () => {
               {/* <button type="button" className="btn" >
                 Pay with Stripe
               </button> */}
-              <div className="App">
-                  <PayComponent items= {cartItems}/>
+              <br />
+              <br />
+              <div>
+                <PayComponent items={cartItems} />
               </div>
             </div>
           </div>

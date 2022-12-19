@@ -10,9 +10,10 @@ import CheckoutForm from "../components/CheckoutForm";
 const stripePromise = loadStripe('pk_test_51M9pCXCSjOrViVMJvb4FuSl2A4DldZqwyHj3PS9trxPooTHgzg2GgkEftV9xFigFxWZSdP7uThOzT6KapHGUsxNy00TPsU2oyk');
 
 export default function StripeApp(props) {
+
   const { items } = props;
   const [clientSecret, setClientSecret] = React.useState("");
-  
+
   // const params = {
   //   id: 1,
   //   units: 2,
@@ -30,6 +31,7 @@ export default function StripeApp(props) {
   //     .then((res) => res.json())
   //     .then((data) => setClientSecret(data.clientSecret));
   // }, []);
+  
   React.useEffect(() => {
     // Create PaymentIntent as soon as the page loads
     fetch("/api/create-payment-intent", {
@@ -40,9 +42,11 @@ export default function StripeApp(props) {
       .then((res) => res.json())
       .then((data) => setClientSecret(data.clientSecret));
   }, []);
+
   const appearance = {
-    theme: 'flat',
+    theme: 'night',
   };
+
   const options = {
     clientSecret,
     appearance,

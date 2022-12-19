@@ -42,7 +42,7 @@ export default function CheckoutForm() {
       }
     });
   }, [stripe]);
-
+  
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -57,8 +57,9 @@ export default function CheckoutForm() {
     const response = await stripe.confirmPayment({
       elements,
       confirmParams: {
+        return_url: 'http://localhost:3000/success',
       },
-      redirect: 'if_required'
+      //redirect: 'if_required',
     });
 
     if (response.error) {
@@ -81,9 +82,6 @@ export default function CheckoutForm() {
     // }
 
     // setIsLoading(false);
-
-
-
   };
 
   const paymentElementOptions = {
